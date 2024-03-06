@@ -3,8 +3,8 @@
 gpu: 0
 
 dataset:
-  input_train: 'PATH_TO_TRAINING_FILES' # This uses glob so training/*/* is probably the end
-  input_test: 'PATH_TO_VAL_FILES' # This uses glob so validate/*/* is probably the end
+  input_train: C:\Users\marko\PycharmProjects\maia-chess-virtualchessplayer\data\training/* # This uses glob so training/*/* is probably the end
+  input_test: C:\Users\marko\PycharmProjects\maia-chess-virtualchessplayer\data\validation/* # This uses glob so validate/*/* is probably the end
 
 training:
     precision: 'half'
@@ -26,6 +26,7 @@ training:
         - 360000
     policy_loss_weight: 1.0            # weight of policy loss
     value_loss_weight: 1.0             # weight of value loss
+    path: /vpANN/
 
 model:
   filters: 64

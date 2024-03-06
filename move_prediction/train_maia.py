@@ -98,6 +98,7 @@ def get_latest_chunks(path):
     maia_chess_backend.printWithDate(f"found {glob.glob(path)} chunk dirs")
     for d in glob.glob(path):
         maia_chess_backend.printWithDate(f"found {len(chunks)} chunks", end = '\r')
+        f = glob.glob(os.path.join(d, '*.gz'))
         chunks += glob.glob(os.path.join(d, '*.gz'))
     maia_chess_backend.printWithDate(f"found {len(chunks)} chunks total")
     if len(chunks) < 10:
@@ -174,15 +175,34 @@ def extract_inputs_outputs(raw):
 def sample(x):
     return tf.math.equal(tf.random.uniform([], 0, SKIP-1, dtype=tf.int32), 0)
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Tensorflow pipeline for training Leela Chess.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+# if __name__ == "__main__":
+#     parser = argparse.ArgumentParser(description='Tensorflow pipeline for training Leela Chess.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+#
+#     parser.add_argument('config', help='config file for model / training')
+#     args = parser.parse_args()
+#     print("args:", args, "args.config:", args.config)
+#
+#     collection_name = os.path.basename(os.path.dirname(args.config)).replace('configs_', '')
+#     name = os.path.basename(args.config).split('.')[0]
+#
+#     multiprocessing.set_start_method('spawn')
+#     main(args.config, name, collection_name)
+#     multiprocessing.freeze_support()
 
-    parser.add_argument('config', help='config file for model / training')
-    args = parser.parse_args()
+# arg = "C:/Users/marko/PycharmProjects/maia-chess-virtualchessplayer/move_prediction/maia_config.yaml"
+# collection_name = os.path.basename(os.path.dirname(arg)).replace('configs_', '')
+# name = os.path.basename(arg).split('.')[0]
+#
+# multiprocessing.set_start_method('spawn')
+# main(arg, name, collection_name)
+# multiprocessing.freeze_support()
 
-    collection_name = os.path.basename(os.path.dirname(args.config)).replace('configs_', '')
-    name = os.path.basename(args.config).split('.')[0]
+config_path = "C:/Users/marko/PycharmProjects/maia-chess-virtualchessplayer/move_prediction/maia_config.yaml"
 
-    multiprocessing.set_start_method('spawn')
-    main(args.config, name, collection_name)
-    multiprocessing.freeze_support()
+with open(config_path) as f:
+    cfg = yaml.safe_load(f.read())
+train_chunks = cfg['dataset']['input_train']
+test_chunks = cfg['dataset']['input_test']
+print(get_latest_chunks(train_chunks))
+
+

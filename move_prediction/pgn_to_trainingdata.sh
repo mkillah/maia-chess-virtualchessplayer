@@ -3,6 +3,9 @@ set -e
 
 max_procs=10
 
+pgn_extract_path="$PWD/pgn-extract.exe"
+trainingdata_tool_path="$PWD/trainingdata-tool.exe"
+
 #sorry these are relative only
 #remove the $PWD to make work with absolute paths
 input_file=$PWD/$1
@@ -18,7 +21,7 @@ cd $output_files/blocks
 #using tool from:
 #https://www.cs.kent.ac.uk/people/staff/djb/pgn-extract/
 
-pgn-extract -7 -C -N  -#1000 $input_file
+"$pgn_extract_path" -7 -C -N -#1000 "$input_file"
 
 #use the first 3000 as validation set
 mv {1..3}.pgn $output_files/validation/
@@ -38,7 +41,7 @@ for data_type in "training" "validation"; do
         cd $p_num
         #using tool from:
         #https://github.com/DanielUranga/trainingdata-tool
-        trainingdata-tool ../$p &
+        "$trainingdata_tool_path" ../$p &
         while [ `echo $(pgrep -c -P$$)` -gt $max_procs ]; do
             printf "waiting\r"
             sleep 1

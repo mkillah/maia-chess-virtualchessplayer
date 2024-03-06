@@ -3,5 +3,9 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/trainingdata-tool" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/trainingdata-tool/lc0" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/trainingdata-tool/lc0/libs/lczero-common" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/trainingdata-tool/polyglot" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/trainingdata-tool/zlib" vcs="Git" />
   </component>
 </project>
